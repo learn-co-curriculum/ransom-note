@@ -32,4 +32,4 @@ In this lab we ask you to implement depth first search.  One skill that we would
 
 Your task is to translate this into code.  The only modification, is that each time a node is visited, please console.log the name of that node.
 
-![] (	https://s3-us-west-2.amazonaws.com/curriculum-content/algorithms/dfs-wikipedia.png)
+![] (https://s3-us-west-2.amazonaws.com/curriculum-content/algorithms/dfs-wikipedia.png)
