@@ -30,6 +30,6 @@ let vertices = [
 
 In this lab we ask you to implement depth first search.  One skill that we would like you to develop is the ability to take an idea and translate it into code.  So here is some pseudocode of depth first search from Wikipedia.  
 
-Your task is to translate this into code.  The only modification, is that each time a node is visited, please console.log the name of that node.
+Your task is to translate this into code.  The only modification, is that each time a node is visited, please push that node into an array.
 
 ![](https://s3-us-west-2.amazonaws.com/curriculum-content/algorithms/dfs-wikipedia.png)
