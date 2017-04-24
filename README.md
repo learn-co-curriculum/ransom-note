@@ -2,7 +2,7 @@
 
 ### Problem
 
-Design an algorithm to determine if you can build a ransom note from a magazine. 
+Design an algorithm to determine if you can build a ransom note from a magazine.
 
 ### Approach
 
@@ -27,31 +27,31 @@ When we feel we have settled in on the problem, it's a good idea to employ a sma
 Ok, so imagine we have a magazine, and let's only consider the letters for now.  Our magazine looks like the following:
 
 ```javascript
-let magazine = ["h", "e", "r", "e", "a", "r", "e", "s", "o", "m", 
+let magazine = ["h", "e", "r", "e", "a", "r", "e", "s", "o", "m",
 "e", "n", "i", "c", "e", "c", "l", "o", "t", "h", "e", "s", "t",
 "h", "a", "t", "y", "o", "u", "s", "h", "o", "u", "l", "d", "b",
-"u", "y", "t", "h", "e", "y", "a", "r", "e", "c", "h", "e", "a", 
+"u", "y", "t", "h", "e", "y", "a", "r", "e", "c", "h", "e", "a",
 "p", "a", "n", "d", "w", "o", "n", "d", "e", "r", "f", "u", "l",
  "f", "o", "r", "t", "h", "e", "s", "u", "m", "m", "e", "r"]
- 
+
  let note = "give me the ferbie or else"
 ```
 
 So now we want to see how we could do this problem.  First, we try to solve the problem in our head.  Immediately, we may think to help ourselves out, by sorting the data magazine.  
 
-```javascript 
+```javascript
  let sortedMagazine = ["a", "a", "a", "a", "a", "b", "c", "c", "c",
- "d", "d", "d", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", 
- "e", "e", "f", "f", "h", "h", "h", "h", "h", "h", "h", "i", "l", 
- "l", "l", "m", "m", "m", "n", "n", "n", "o", "o", "o", "o", "o", 
- "o", "p", "r", "r", "r", "r", "r", "r", "s", "s", "s", "s", "t", 
+ "d", "d", "d", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e",
+ "e", "e", "f", "f", "h", "h", "h", "h", "h", "h", "h", "i", "l",
+ "l", "l", "m", "m", "m", "n", "n", "n", "o", "o", "o", "o", "o",
+ "o", "p", "r", "r", "r", "r", "r", "r", "s", "s", "s", "s", "t",
  "t", "t", "t", "t", "u", "u", "u", "u", "u", "w", "y", "y", "y"]
- 
+
 let note = "hand me the ferbie or else"
 
 ```
 
-> We may assume that we do not need to consider if our magazine has enough spaces, as they are easy enough to construct simply by leaving a space where appropriate. 
+> We may assume that we do not need to consider if our magazine has enough spaces, as they are easy enough to construct simply by leaving a space where appropriate.
 
 Now our problem seems like we can solve it in our head.  Is there a letter "h", there is.  So remove the "h" from the magazine collection and move to the next letter, "a".  Then "n".  
 
@@ -59,10 +59,10 @@ Now there may be a couple of things that you notice as you go through this proce
 
 Another thing that you may notice is that when we go through our magazine, we are again employing...**repeated lookup**.  And therefore as usual we can move from a sorted array and binary search to using a hash.  In this case, we not only need to store each letter, but also the number of times that the letter occurs.  This way we can later on know if we have enough letter a's, for example, to construct our note.
 
-We call this hash where each key lines up to a number that represents the related frequency a **histogram**.  It looks like this: 
+We call this hash where each key lines up to a number that represents the related frequency a **histogram**.  It looks like this:
 
 ```javascript
-let magazineHistorgram = {a: 6, b: 1, c: 3, d: 3, e: 12, 
+let magazineHistorgram = {a: 6, b: 1, c: 3, d: 3, e: 12,
 f: 2, h: 7, ...}
 ```
 
@@ -70,29 +70,29 @@ It looks like we are making some progress.  It's time to estimate the cost of th
 
 Now that we know this part, can you fill in the rest?
 
-	```text 
+	```text
 	This is your thinking space.
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	Some thinking.
-	
-	
+
+
 	And some more.
-	
+
 	Ok, here is some thinking.
-	
-	
+
+
 	```
 
 So we have our magazine histogram.  
 
 ```javascript
 let note = "hand me the ferbie or else"
-let magazineHistorgram = {a: 6, b: 1, c: 3, d: 3, e: 12, 
+let magazineHistorgram = {a: 6, b: 1, c: 3, d: 3, e: 12,
 f: 2, h: 7, ...}
 ```
 
@@ -113,27 +113,26 @@ But think about how you would do this in real life.  Would you do it more effici
 If we gave you this ransom note to construct in real life, you likely would try to find a shortcut to avoid going through every letter in the ransom magazine.  Wouldn't you stop once your note was complete, or would you continue to place all of your magazine letters into a hash.  You would stop.  Ok, so now how would you solve the problem, to make it even more efficient?
 
 
-```text 
+```text
 This is your thinking space.
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 Some thinking.
-	
-	
+
+
 And some more.
-	
+
 Ok, here is some thinking.
-	
-	
+
+
 ```
-	
+
 Instead, you might start with the first letter in the note, "h", and then go place every letter in the magazine into a hash until we reach the letter "h".  Then you would move to the next letter, a, see if that letter is in our hash in O(1) time, and if it is not keep placing letters from the magazine into our hash.  You finish the algorithm if: (1) you reach a letter in the note that does not have a letter in the algorithm, or (2) you have successfully gone through each letter in the note and found a corresponding letter.
 
 Ok, now test this technique with an example.  Try to think through any missing edge cases, and if you feel comfortable, translate this into code.
 
 ### Summary
-
