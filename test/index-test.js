@@ -1,26 +1,35 @@
-let edges = [
-	['14th&6th', '23rd&6th'],
-	['23rd&6th', '34th&6th'],
-	['34th&6th', '28th&Bwy'],
-	['28th&Bwy', '23rd&Bwy'],
-	['23rd&Bwy', '14th&Lex'],
-	['14th&Lex', '23rd&Lex']
-]
+	// var expect = require('chai').expect
 
-let vertices = [
-  {name: '34th&6th', discovered: null},
-  {name: '23rd&6th', discovered: null},
-  {name: '14th&6th', discovered: null},
-  {name: '28th&Bwy', discovered: null},
-	{name: '23rd&Bwy', discovered: null},
-  {name: '14th&Lex', discovered: null},
-	{name: '23rd&Lex', discovered: null}
-]
-
-
-describe('#depthFirstSearch', function() {
-	it('prints out the nodes in order', function(){
-		let rootNode = vertices[0]
-		expect(depthFirstSearch(rootNode, vertices, edges).map(function(vertex){return vertex.name;})).toEqual(['34th&6th', '23rd&6th', '28th&Bwy', '23rd&Bwy', '14th&Lex', '23rd&Lex', '14th&6th'])
+describe('#binaryMatch', function() {
+	let magazine = ["h", "e", "r", "e", "a", "r", "e", "s", "o", "m",
+	"e", "n", "i", "c", "e", "c", "l", "o", "t", "h", "e", "s", "t"]
+	it("collects assigns each letter as a key and the number of occurrences as the value", function() {
+		let result = [{"a": 1}, {"c": 2}, {"e": 6}, {"h": 2}, {"i": 1}, {"l": 1}, {"m": 1}, {"n": 1}, {"o": 2}, {"r": 2}, {"s": 2}, {"t": 2}]
+		let functionResult = buildHistogram(magazine)
+			expect(functionResult["e"]).toEqual(6)
+			expect(functionResult["h"]).toEqual(2)
 	})
-});
+})
+
+describe('#canBuildNote', function() {
+	it("returns false if cannot build the note", function() {
+		let magazine = ["h", "e", "r", "e", "a", "r", "e", "s", "o", "m",
+		"e", "n", "i", "c", "e", "c", "l", "o", "t", "h", "e", "s", "t"]
+		let note = "handitover"
+		expect(canBuildNote(magazine, note)).toEqual(false)
+	})
+
+	it("returns false if cannot build the note with repeated letters", function() {
+		let magazine = ["h", "e", "r", "e", "a", "r", "e", "s", "o", "m",
+		"e", "n", "i", "c", "e", "c", "l", "o", "t", "h", "e", "s", "t"]
+		let note = "iisat"
+		expect(canBuildNote(magazine, note)).toEqual(false)
+	})
+
+	it("returns true if can build the note", function() {
+		let magazine = ["h", "e", "r", "e", "a", "r", "e", "s", "o", "m",
+		"e", "n", "i", "c", "e", "c", "l", "o", "t", "h", "e", "s", "t"]
+		let note = "hereisat"
+		expect(canBuildNote(magazine, note)).toEqual(true)
+	})
+})
