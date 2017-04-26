@@ -6,15 +6,15 @@ Design an algorithm to determine if you can build a ransom note from a magazine.
 
 ### Approach
 
-So make sure that you follow the same basic structure as you did previously.  So what would that first step be.
+So make sure that you follow the same basic process as you did in the previous problem.  So what would that first step be.
 
 * Clarify the problem
 
-Once again, we need to clarify the problem.  This time, because our task is grounded in a domain, we can include considerations that we perhaps should consider in real life.  
+Once again, we need to clarify the problem.  This time, because our task is grounded in a domain, we can include considerations that we perhaps would consider in real life.  
 
-For example, is it safe to assume our magazine is larger than our ransom note?  Well, if it is not, we know that we cannot construct the note from the magazine.
+For example, is it safe to assume our magazine is larger than our ransom note?  Well, if our magazine is smaller, we know that we cannot construct the note from the magazine.
 
-Other questions to ask in clarifying the problem.  Well, we might want to consider if we need to use punctuation, do we need to match capital letters.  (We are.)  When we split up our magazine, are splitting up letters, words, or both.  Let's simplify it by just splitting up letters.  
+What other questions can we ask in clarifying the problem.  Well, we might want to consider if we need to use punctuation, do we need to match capital letters with only capital letters.  (No to both questions.)  When we split up our magazine, are we splitting up letters, words, or both.  Let's simplify it by just splitting up letters.  
 
 > If our interviewer told us, we should split by both words and letters, that could be a more complicated problem.  In that case, we would simply by first assuming we are only splitting up by letters, and then move onto cost savings we might get by splitting up by words as well.
 
@@ -37,7 +37,31 @@ let magazine = ["h", "e", "r", "e", "a", "r", "e", "s", "o", "m",
  let note = "give me the ferbie or else"
 ```
 
-So now we want to see how we could do this problem.  First, we try to solve the problem in our head.  Immediately, we may think to help ourselves out, by sorting the data magazine.  
+So now we want to see how we could do this problem.  First, we try to solve the problem in our head.  
+
+```text 
+How would you solve this problem if we forced you to.  
+
+We give you a magazine of cut up letters...
+and ask you to construct a note.
+
+You gotta do it
+
+Ferbies need to be yours
+
+You are obsessed
+
+
+
+
+
+And without concern for original Ferbie owners
+
+```
+
+
+
+Immediately, we may think to help ourselves out, by sorting the data in the magazine.  
 
 ```javascript
  let sortedMagazine = ["a", "a", "a", "a", "a", "b", "c", "c", "c",
@@ -55,11 +79,15 @@ let note = "hand me the ferbie or else"
 
 Now our problem seems like we can solve it in our head.  Is there a letter "h", there is.  So remove the "h" from the magazine collection and move to the next letter, "a".  Then "n".  
 
+> You see how relating this to the real world made this easier?  If I gave you a magzine and told you to construct a phrase from the letters, you wouldn't be so intimidated.  So lean on real world problems.  For arrays, think of a list, and for hashes think of putting each value into a bucket that represents the key.
+
 Now there may be a couple of things that you notice as you go through this process.  The first is that, we could potentially optimize this by sorting the letters in our note as well.  That way when we move on from an "a" in our note, we know that we can remove the "a"s in our sortedMagazine as they are no longer needed.  
 
-Another thing that you may notice is that when we go through our magazine, we are again employing...**repeated lookup**.  And therefore as usual we can move from a sorted array and binary search to using a hash.  In this case, we not only need to store each letter, but also the number of times that the letter occurs.  This way we can later on know if we have enough letter a's, for example, to construct our note.
+Another thing that you may notice is that when we go through our magazine, we are again employing...**repeated lookup**.  And therefore as usual we can move from a sorted array and binary search to see if the required letter is in our magazine, to using a hash.  
 
-We call this hash where each key lines up to a number that represents the related frequency a **histogram**.  It looks like this:
+For this problem, we not only need to store each letter, but also the number of times that the letter occurs.  This way we can know later on if we have enough letter a's, for example, to construct our note.
+
+We call this hash where each key pairs up with a number that represents the related frequency a **histogram**.  It looks like this:
 
 ```javascript
 let magazineHistorgram = {a: 6, b: 1, c: 3, d: 3, e: 12,
@@ -68,7 +96,7 @@ f: 2, h: 7, ...}
 
 It looks like we are making some progress.  It's time to estimate the cost of this procedure.  We say that placing these letters in a histogram is O(m) where m is the number of letters in the histogram.
 
-Now that we know this part, can you fill in the rest?
+Now that we know that we have our histogram, how do we answer whether we can write our note? Can you solve this on your own?  Problem solve first, and then consider the big O of your procedure?  Then can you translate this into code?  Give it a shot.
 
 	```text
 	This is your thinking space.
@@ -100,7 +128,7 @@ Then for each letter in the note, we see if that letter is in our magazine histo
 
 ### What's the cost
 
-Ok, now that we have settled in fairly efficient solution, we should ask what is the cost.  
+Ok, now that we have settled in with a seemingly fairly efficient solution, we should ask what is the cost.  
 
 So the cost of placing all of each letter of the magazine in a histogram costs O(m)*O(1) or O(m).  And the second step of checking to see if there are remaining letters in the hash is O(n).  One for each letter in the note.  So the total cost is O(m + n), which reduces to O(2m) because the note is no larger than the magazine, which reduces to O(m).  
 
@@ -136,3 +164,5 @@ Instead, you might start with the first letter in the note, "h", and then go pla
 Ok, now test this technique with an example.  Try to think through any missing edge cases, and if you feel comfortable, translate this into code.
 
 ### Summary
+
+In this section, we saw yet another use for a hash: a histogram.  With a histogram, each key pairs up with a number that represents the related frequency **histogram**.  We also saw another case of repeated lookup.  Finally, after settling in on a solution, we continued to ask, "Can we do better" to optimize our solution.
