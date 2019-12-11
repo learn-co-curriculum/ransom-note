@@ -1,9 +1,9 @@
 
-describe('#binaryMatch', function() {
+describe('#buildHistogram', function() {
 	let magazine = ["h", "e", "r", "e", "a", "r", "e", "s", "o", "m",
 	"e", "n", "i", "c", "e", "c", "l", "o", "t", "h", "e", "s", "t"]
 	it("collects assigns each letter as a key and the number of occurrences as the value", function() {
-		let result = [{"a": 1}, {"c": 2}, {"e": 6}, {"h": 2}, {"i": 1}, {"l": 1}, {"m": 1}, {"n": 1}, {"o": 2}, {"r": 2}, {"s": 2}, {"t": 2}]
+		let result = {"a": 1, "c": 2, "e": 6, "h": 2, "i": 1, "l": 1, "m": 1, "n": 1, "o": 2, "r": 2, "s": 2, "t": 2}
 		let functionResult = buildHistogram(magazine)
 		expect(functionResult["e"]).toEqual(6)
 		expect(functionResult["h"]).toEqual(2)
