@@ -1,4 +1,6 @@
 ---
-:page_id: 
-:course_id: 239
-:canvas_url: https://learning.flatironschool.com/courses/239/assignments/4927
+:lessons:
+- :id: 5009
+  :course_id: 272
+  :canvas_url: https://learning.flatironschool.com/courses/272/assignments/5009
+  :type: assignment
